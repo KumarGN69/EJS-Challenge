@@ -16,16 +16,46 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+
+function renderPage(pageToBeRendered,options, response){
+	response.render(pageToBeRendered,options);
+}
 //GET route
 app.get("/", function(req,res){
 	// ejs function render with the name of the ejs file and options
 	
 	const pageToBeRendered = "home";
 	const options = {
-		h1Heading:"Home",
+		homePageHeading:"Home",
 		startPageContent:homeStartingContent
 	}
-	res.render(pageToBeRendered,options);
+	// res.render(pageToBeRendered,options);
+	renderPage(pageToBeRendered,options,res);
+});
+
+//GET about ROUTE
+app.get("/about", function(req,res){
+	// ejs function render with the name of the ejs file and options
+	
+	const pageToBeRendered = "about";
+	const options = {
+		aboutPageHeading:"About",
+		aboutPageContent:aboutContent
+	}
+	renderPage(pageToBeRendered,options,res);
+});
+
+//GET contact ROUTE
+app.get("/contact", function(req,res){
+	// ejs function render with the name of the ejs file and options
+	
+	// console.log(req.url);
+	const pageToBeRendered = "contact";
+	const options = {
+		contactPageHeading:"Contact",
+		contactPageContent:contactContent
+	}
+	renderPage(pageToBeRendered,options,res);
 });
 
 
