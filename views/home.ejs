@@ -5,7 +5,10 @@
 
 <%posts.forEach(function(element){%>
 	<h3><%=element.title%></h3>
-	<p><%=element.content%></p>
+	<p>
+	<%=element.content%>
+	<a href="/posts/<%=element.title%>">Read more</a>
+	</p>
 <%})%>
 
 <%-include("./partials/footer")-%>

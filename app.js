@@ -11,6 +11,7 @@ const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pelle
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
 const posts =[];
+const postsSummary=[];
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -28,7 +29,7 @@ app.get("/", function(req,res){
 	const options = {
 		homePageHeading:"Home",
 		startPageContent:homeStartingContent,
-		posts:posts
+		posts:postsSummary
 	}
 	
 	res.render(pageToBeRendered,options);
@@ -79,7 +80,11 @@ app.post("/compose", function(req,res){
 	};
 	
 	posts.push(post);
-	
+	const postSummary={
+		title: req.body.postTitle , 
+		content: _.truncate(req.body.postBody,{length:100})
+	}
+	postsSummary.push(postSummary);
 	res.redirect("/");
 });
 
@@ -92,20 +97,23 @@ app.get("/posts/:topic",function(req,res){
 		postContent:""
 	}
 	
-	for(let i=0;i<posts.length;i++){
-		console.log(req.params.topic);
-		if(_.lowerCase(posts[i].title) === _.lowerCase(req.params.topic)){
+	// for(let i=0;i<posts.length;i++){
+	// 	console.log(req.params.topic);
+	// 	if(_.lowerCase(posts[i].title) === _.lowerCase(req.params.topic)){
+	// 		console.log("Match found!");
+	// 		options.postHeading=posts[i].title;
+	// 		options.postContent=posts[i].content;
+	// 		res.render(pageToBeRendered,options);
+	// 	}
+	// }
+	posts.forEach(function(element){
+		if(_.lowerCase(element.title) === _.lowerCase(req.params.topic)){
 			console.log("Match found!");
-			options.postHeading=posts[i].title;
-			options.postContent=posts[i].content;
+			options.postHeading=element.title;
+			options.postContent=element.content;
 			res.render(pageToBeRendered,options);
-		}else{
-			console.log("No Match!");
-			options.postHeading="No post by that title";
-			options.postContent="Why don't you create one?";
-			res.render(pageToBeRendered,options)
 		}
-	}
+	})
 	
 });
 
