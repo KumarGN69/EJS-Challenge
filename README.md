@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ```
 ┌───────────────────────────────────────────────┐
                                        _       
@@ -45,3 +46,6 @@ goormIDE is a powerful cloud IDE service to maximize productivity for developers
 
 Visit [https://ide.goorm.io](https://ide.goorm.io) to support and learn more about using goormIDE.  
 To watch some usage guides, visit [https://help.goorm.io/en/goormide](https://help.goorm.io/en/goormide)
+=======
+# EJS-Challenge
+>>>>>>> 51e08fe7720e22abf8d2d82582ead280092c86c7

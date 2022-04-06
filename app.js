@@ -89,8 +89,10 @@ app.get("/posts/:topic",function(req,res){
 	// console.log(req.params.topic);
 	for(let i=0;i<posts.length;i++){
 		console.log(req.params.topic);
-		if(posts[i].title === req.params.topic){
+		if(posts[i].title.toLowerCase() === req.params.topic.toLowerCase()){
 			console.log("Match found!");
+		}else{
+			console.log("No Match!");
 		}
 	}
 });
