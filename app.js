@@ -85,7 +85,15 @@ app.post("/compose", function(req,res){
 });
 
 
-
+app.get("/posts/:topic",function(req,res){
+	// console.log(req.params.topic);
+	for(let i=0;i<posts.length;i++){
+		console.log(req.params.topic);
+		if(posts[i].title === req.params.topic){
+			console.log("Match found!");
+		}
+	}
+});
 
 
 
